@@ -1,0 +1,49 @@
+[package]
+name = "riot2fa"
+version = "0.1.0"
+description = "2FA de escritorio para cuentas de Riot Games"
+authors = ["noxx"]
+edition = "2024"
+
+[lib]
+
+name = "riot2fa_lib"
+
+crate-type = ["rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+hmac = "0.12"
+sha2 = "0.10"
+base32 = "0.5"
+
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+
+chacha20poly1305 = "0.10"
+getrandom = "0.2"
+base64 = "0.22"
+keyring = { version = "3", features = ["apple-native"] }
+
+flate2 = "1"
+
+robius-authentication = "0.3"
+
+[dev-dependencies]
+
+[profile.dev]
+debug = 0
+strip = "debuginfo"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
